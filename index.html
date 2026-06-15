@@ -67,6 +67,23 @@
     text-align: right;
     min-height: 14px;
   }
+  .copy-btn {
+    margin-top: 10px;
+    background: #3a3a3c;
+    color: #ff9f0a;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    gap: 6px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .copy-btn.show { display: inline-flex; }
+  .copy-btn.copied { color: #30d158; }
   .fields { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
   .field-label { color: #8e8e93; font-size: 12px; margin-bottom: 5px; }
   select {
@@ -155,6 +172,7 @@
     <div class="display-value" id="output"></div>
     <div class="display-unit" id="output-unit"></div>
     <div class="formula-text" id="formula"></div>
+    <button class="copy-btn" id="copyBtn" onclick="copyResult()">📋 複製結果</button>
   </div>
   <div class="fields">
     <div>
@@ -173,7 +191,7 @@
       </select>
     </div>
     <div>
-      <div class="field-label">半成品批量（Kg）</div>
+      <div class="field-label">半成品批量（kg）</div>
       <select id="batch" onchange="calc()" disabled>
         <option value="">請先選擇類別</option>
       </select>
@@ -192,7 +210,7 @@
     </div>
   </div>
   <div class="error" id="error"></div>
-  <div class="disclaimer">僅供參考，實際情況請與負責同仁確認</div>
+  <div class="disclaimer">僅供內部估算參考，不作為正式生產依據。</div>
 </div>
 <script>
 const categoryBatches = {
@@ -207,6 +225,18 @@ const categoryBatches = {
   '生髮液': [50, 100],
 };
 
+const categoryDensity = {
+  '洗髮精': 1.02,
+  '凝膠':   1.05,
+  '慕斯':   1.03,
+  '泥膜':   1.00,
+  '潤髮乳': 0.94,
+  '髮油':   0.94,
+  '頭皮舒緩液': 1.01,
+  '頭皮營養液': 0.97,
+  '生髮液': 0.88,
+};
+
 function onCategoryChange() {
   const cat = document.getElementById('category').value;
   const batchSel = document.getElementById('batch');
@@ -219,10 +249,11 @@ function onCategoryChange() {
     categoryBatches[cat].forEach(v => {
       const opt = document.createElement('option');
       opt.value = v;
-      opt.textContent = v + ' Kg';
+      opt.textContent = v + ' kg';
       batchSel.appendChild(opt);
     });
     batchSel.disabled = false;
+    document.getElementById('density').value = categoryDensity[cat].toFixed(2);
   }
   calc();
 }
@@ -239,6 +270,7 @@ function handleDensityKey(e) {
   }
 }
 function calc() {
+  const cat = document.getElementById('category').value;
   const batch = parseFloat(document.getElementById('batch').value);
   const density = parseFloat(document.getElementById('density').value);
   const volume = parseFloat(document.getElementById('volume').value);
@@ -246,7 +278,10 @@ function calc() {
   const outUnit = document.getElementById('output-unit');
   const formula = document.getElementById('formula');
   const error = document.getElementById('error');
+  const copyBtn = document.getElementById('copyBtn');
   error.textContent = '';
+  copyBtn.classList.remove('show', 'copied');
+  copyBtn.textContent = '📋 複製結果';
   if (isNaN(batch) || isNaN(density) || isNaN(volume)) {
     out.textContent = '';
     outUnit.textContent = '';
@@ -263,6 +298,21 @@ function calc() {
   out.textContent = result.toLocaleString();
   outUnit.textContent = 'pcs';
   formula.textContent = `${batch} × 1000 ÷ ${density} ÷ ${volume} = ${result.toLocaleString()}`;
+  copyBtn.classList.add('show');
+  copyBtn.dataset.info = `${cat} / ${batch}kg / 密度${density} / 容量${volume}mL → 理論產出${result.toLocaleString('en-US')} pcs`;
+}
+
+function copyResult() {
+  const copyBtn = document.getElementById('copyBtn');
+  const text = copyBtn.dataset.info || '';
+  navigator.clipboard.writeText(text).then(() => {
+    copyBtn.classList.add('copied');
+    copyBtn.textContent = '✓ 已複製';
+    setTimeout(() => {
+      copyBtn.classList.remove('copied');
+      copyBtn.textContent = '📋 複製結果';
+    }, 1200);
+  });
 }
 </script>
 </body>
