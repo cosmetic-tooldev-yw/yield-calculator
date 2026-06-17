@@ -299,7 +299,7 @@ function calc() {
   outUnit.textContent = 'pcs';
   formula.textContent = `${batch} × 1000 ÷ ${density} ÷ ${volume} = ${result.toLocaleString()}`;
   copyBtn.classList.add('show');
-  copyBtn.dataset.info = `${cat} / ${batch}kg / 密度${density} / 容量${volume}mL → 理論產出${result.toLocaleString('en-US')} pcs`;
+  copyBtn.dataset.info = `${cat} / 每批${batch}kg / 容量${volume}mL → 理論產出${result.toLocaleString('en-US')} pcs`;
 }
 
 function copyResult() {
