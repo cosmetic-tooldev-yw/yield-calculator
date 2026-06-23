@@ -309,7 +309,8 @@ function handleDensityKey(e) {
 function stepBottles(dir) {
   const el = document.getElementById('bigBottles');
   const cur = parseInt(el.value) || 0;
-  el.value = Math.max(0, cur + dir);
+  const result = dir > 0 ? Math.floor(cur / 100) * 100 + 100 : Math.ceil(cur / 100) * 100 - 100;
+  el.value = Math.max(0, result);
   calc();
 }
 
