@@ -150,22 +150,26 @@
   .mix-formula { color: #636366; font-size: 10px; margin-top: 2px; }
   .warning-text { color: #ff453a; font-size: 11px; margin-top: 4px; text-align: right; }
 
+  .copy-wrap {
+    margin-top: 10px;
+    display: none;
+    justify-content: center;
+  }
+  .copy-wrap.show { display: flex; }
   .copy-btn {
-    margin-top: 12px;
     background: #3a3a3c;
     color: #ff9f0a;
     border: none;
     border-radius: 10px;
-    padding: 6px 12px;
+    padding: 6px 16px;
     font-size: 12px;
     font-family: inherit;
     cursor: pointer;
-    display: none;
+    display: flex;
     align-items: center;
     gap: 6px;
     -webkit-tap-highlight-color: transparent;
   }
-  .copy-btn.show { display: inline-flex; }
   .copy-btn.copied { color: #30d158; }
 
   .disclaimer { color: #636366; font-size: 11px; text-align: center; margin-top: 16px; }
@@ -256,7 +260,9 @@
       <div class="warning-text" id="overWarning"></div>
     </div>
 
-    <button class="copy-btn" id="copyBtn" onclick="copyResult()">複製結果</button>
+    <div class="copy-wrap" id="copyWrap">
+      <button class="copy-btn" id="copyBtn" onclick="copyResult()">複製結果</button>
+    </div>
   </div>
 
   <div class="disclaimer">僅供內部估算參考，不作為正式生產依據。</div>
@@ -328,7 +334,9 @@ function calc() {
   const mixResult = document.getElementById('mixResult');
   const bigBottlesField = document.getElementById('bigBottlesField');
 
-  copyBtn.classList.remove('show', 'copied');
+  const copyWrap = document.getElementById('copyWrap');
+  copyBtn.classList.remove('copied');
+  copyWrap.classList.remove('show');
   copyBtn.textContent = '複製結果';
 
   const wasMix = bigBottlesField.style.display === 'block';
@@ -367,7 +375,7 @@ function calc() {
       remainKg > 0 ? `剩餘 ${remainKg.toFixed(3)} kg` : '半成品不足';
 
     if (displayBig !== '' && remainKg > 0) {
-      copyBtn.classList.add('show');
+      copyWrap.classList.add('show');
       copyBtn.dataset.info =
         `${cat}\n每批 ${batch} kg / 混批生產\n` +
         `→ 大容量 ${bigVol} mL 產出 ${bigBottles.toLocaleString()} pcs\n` +
@@ -389,7 +397,7 @@ function calc() {
   document.getElementById('formula').textContent =
     `${batch} × 1000 ÷ ${density} ÷ ${bigVol} = ${result.toLocaleString()}`;
 
-  copyBtn.classList.add('show');
+  copyWrap.classList.add('show');
   copyBtn.dataset.info =
     `${cat}\n每批 ${batch} kg / 容量 ${bigVol} mL\n→ 每批理論產出 ${result.toLocaleString()} pcs`;
 }
