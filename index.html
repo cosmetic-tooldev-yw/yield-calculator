@@ -33,86 +33,8 @@
     margin-bottom: 24px;
     letter-spacing: 0.3px;
   }
-  .display {
-    background: #2c2c2e;
-    border-radius: 20px;
-    padding: 18px 22px;
-    margin-bottom: 20px;
-  }
-  .display-label {
-    color: #8e8e93;
-    font-size: 12px;
-    margin-bottom: 6px;
-  }
-
-  /* 單批模式 */
-  .single-result { text-align: right; }
-  .display-value {
-    font-size: 52px;
-    font-weight: 300;
-    color: #ff9f0a;
-    line-height: 1;
-    letter-spacing: -1px;
-    min-height: 52px;
-  }
-  .display-unit {
-    color: #8e8e93;
-    font-size: 16px;
-    margin-top: 4px;
-  }
-  .formula-text {
-    color: #636366;
-    font-size: 11px;
-    margin-top: 8px;
-    text-align: right;
-    min-height: 14px;
-  }
-
-  /* 混批模式 */
-  .mix-result { display: none; flex-direction: column; gap: 10px; }
-  .mix-result.show { display: flex; }
-  .mix-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    border-bottom: 1px solid #3a3a3c;
-    padding-bottom: 8px;
-  }
-  .mix-row:last-child { border-bottom: none; padding-bottom: 0; }
-  .mix-row-label { color: #8e8e93; font-size: 12px; }
-  .mix-row-right { text-align: right; }
-  .mix-row-value {
-    font-size: 36px;
-    font-weight: 300;
-    color: #ff9f0a;
-    line-height: 1;
-    letter-spacing: -0.5px;
-  }
-  .mix-row-unit { color: #8e8e93; font-size: 13px; margin-top: 2px; }
-  .mix-formula { color: #636366; font-size: 10px; margin-top: 2px; }
-
-  .copy-btn {
-    margin-top: 6px;
-    background: #3a3a3c;
-    color: #ff9f0a;
-    border: none;
-    border-radius: 10px;
-    padding: 6px 12px;
-    font-size: 12px;
-    font-family: inherit;
-    cursor: pointer;
-    display: none;
-    align-items: center;
-    gap: 6px;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .copy-btn.show { display: inline-flex; }
-  .copy-btn.copied { color: #30d158; }
-
   .fields { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
   .field-label { color: #8e8e93; font-size: 12px; margin-bottom: 5px; }
-  .field-hint { color: #48484a; font-size: 10px; margin-bottom: 5px; }
-
   select {
     width: 100%;
     background: #2c2c2e;
@@ -131,6 +53,7 @@
     outline: none;
   }
   select option { background: #2c2c2e; }
+  select:disabled { opacity: 0.4; cursor: not-allowed; }
   .stepper-row {
     display: flex;
     align-items: center;
@@ -172,7 +95,6 @@
   .step-btn:active { background: #ff9f0a; }
   .step-btn.minus { border-right: 1px solid #2c2c2e; }
   .step-btn.plus  { border-left:  1px solid #2c2c2e; }
-
   input.vol-input {
     width: 100%;
     background: #2c2c2e;
@@ -188,55 +110,70 @@
   input.vol-input::-webkit-inner-spin-button,
   input.vol-input::-webkit-outer-spin-button { -webkit-appearance: none; }
   input.vol-input::placeholder { color: #48484a; }
+  .divider { height: 1px; background: #3a3a3c; margin: 4px 0 2px; }
 
-  /* 分隔線 */
-  .divider {
-    height: 1px;
-    background: #3a3a3c;
-    margin: 4px 0 2px;
+  /* 結果區 */
+  .display {
+    background: #2c2c2e;
+    border-radius: 20px;
+    padding: 18px 22px;
+    margin-top: 16px;
   }
+  .display-label { color: #8e8e93; font-size: 12px; margin-bottom: 6px; }
 
-  .warning-text { color: #ff453a; font-size: 11px; margin-top: 6px; text-align: right; }
+  .single-result { text-align: right; }
+  .display-value {
+    font-size: 52px;
+    font-weight: 300;
+    color: #ff9f0a;
+    line-height: 1;
+    letter-spacing: -1px;
+    min-height: 52px;
+  }
+  .display-unit { color: #8e8e93; font-size: 16px; margin-top: 4px; }
+  .formula-text { color: #636366; font-size: 11px; margin-top: 8px; text-align: right; min-height: 14px; }
+
+  .mix-result { display: none; flex-direction: column; gap: 10px; }
+  .mix-result.show { display: flex; }
+  .mix-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid #3a3a3c;
+    padding-bottom: 8px;
+  }
+  .mix-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .mix-row-label { color: #8e8e93; font-size: 12px; }
+  .mix-row-right { text-align: right; }
+  .mix-row-value { font-size: 36px; font-weight: 300; color: #ff9f0a; line-height: 1; letter-spacing: -0.5px; }
+  .mix-row-unit { color: #8e8e93; font-size: 13px; margin-top: 2px; }
+  .mix-formula { color: #636366; font-size: 10px; margin-top: 2px; }
+  .warning-text { color: #ff453a; font-size: 11px; margin-top: 4px; text-align: right; }
+
+  .copy-btn {
+    margin-top: 12px;
+    background: #3a3a3c;
+    color: #ff9f0a;
+    border: none;
+    border-radius: 10px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-family: inherit;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    gap: 6px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .copy-btn.show { display: inline-flex; }
+  .copy-btn.copied { color: #30d158; }
+
   .disclaimer { color: #636366; font-size: 11px; text-align: center; margin-top: 16px; }
-  select:disabled { opacity: 0.4; cursor: not-allowed; }
 </style>
 </head>
 <body>
 <div class="card">
   <div class="title">生產量計算機（頭髮類化粧品）</div>
-  <div class="display">
-    <div class="display-label">每批理論產出</div>
-
-    <!-- 單批模式 -->
-    <div class="single-result" id="singleResult">
-      <div class="display-value" id="output"></div>
-      <div class="display-unit" id="output-unit"></div>
-      <div class="formula-text" id="formula"></div>
-    </div>
-
-    <!-- 混批模式 -->
-    <div class="mix-result" id="mixResult">
-      <div class="mix-row">
-        <div class="mix-row-label" id="bigLabel">大容量</div>
-        <div class="mix-row-right">
-          <div class="mix-row-value" id="bigOutput"></div>
-          <div class="mix-row-unit">pcs</div>
-          <div class="mix-formula" id="bigFormula"></div>
-        </div>
-      </div>
-      <div class="mix-row">
-        <div class="mix-row-label" id="smallLabel">小容量</div>
-        <div class="mix-row-right">
-          <div class="mix-row-value" id="smallOutput"></div>
-          <div class="mix-row-unit">pcs</div>
-          <div class="mix-formula" id="smallFormula"></div>
-        </div>
-      </div>
-      <div class="warning-text" id="overWarning"></div>
-    </div>
-
-    <button class="copy-btn" id="copyBtn" onclick="copyResult()">複製結果</button>
-  </div>
 
   <div class="fields">
     <div>
@@ -271,7 +208,6 @@
 
     <div class="divider"></div>
 
-    <!-- 大容量 -->
     <div>
       <div class="field-label">大容量（mL）</div>
       <input class="vol-input" type="number" id="bigVol" placeholder="例：500" min="0" step="any" oninput="calc()" />
@@ -280,16 +216,47 @@
       <div class="field-label">大容量希望生產瓶數</div>
       <div class="stepper-row">
         <button class="step-btn minus" onclick="stepBottles(-100)">−</button>
-        <input type="number" id="bigBottles" value="" placeholder="瓶" oninput="calc()" />
+        <input type="number" id="bigBottles" placeholder="瓶" oninput="calc()" />
         <button class="step-btn plus" onclick="stepBottles(100)">+</button>
       </div>
     </div>
-
-    <!-- 小容量（選填） -->
     <div>
       <div class="field-label">小容量（mL）<span style="color:#48484a;font-size:10px;margin-left:6px;">選填，留空則不計算混批</span></div>
       <input class="vol-input" type="number" id="smallVol" placeholder="例：200" min="0" step="any" oninput="calc()" />
     </div>
+  </div>
+
+  <!-- 結果區移至最下 -->
+  <div class="display" id="displayBox" style="display:none;">
+    <div class="display-label">每批理論產出</div>
+
+    <div class="single-result" id="singleResult">
+      <div class="display-value" id="output"></div>
+      <div class="display-unit" id="output-unit"></div>
+      <div class="formula-text" id="formula"></div>
+    </div>
+
+    <div class="mix-result" id="mixResult">
+      <div class="mix-row">
+        <div class="mix-row-label" id="bigLabel"></div>
+        <div class="mix-row-right">
+          <div class="mix-row-value" id="bigOutput"></div>
+          <div class="mix-row-unit">pcs</div>
+          <div class="mix-formula" id="bigFormula"></div>
+        </div>
+      </div>
+      <div class="mix-row">
+        <div class="mix-row-label" id="smallLabel"></div>
+        <div class="mix-row-right">
+          <div class="mix-row-value" id="smallOutput"></div>
+          <div class="mix-row-unit">pcs</div>
+          <div class="mix-formula" id="smallFormula"></div>
+        </div>
+      </div>
+      <div class="warning-text" id="overWarning"></div>
+    </div>
+
+    <button class="copy-btn" id="copyBtn" onclick="copyResult()">複製結果</button>
   </div>
 
   <div class="disclaimer">僅供內部估算參考，不作為正式生產依據。</div>
@@ -297,15 +264,9 @@
 
 <script>
 const categoryBatches = {
-  '洗髮精': [510, 1000],
-  '凝膠':   [50, 100, 200],
-  '慕斯':   [510, 1000],
-  '泥膜':   [100],
-  '潤髮乳': [100],
-  '髮油':   [24, 30, 50, 100],
-  '頭皮舒緩液': [50, 100, 200],
-  '頭皮營養液': [24, 30, 100],
-  '生髮液': [50, 100],
+  '洗髮精': [510, 1000], '凝膠': [50, 100, 200], '慕斯': [510, 1000],
+  '泥膜': [100], '潤髮乳': [100], '髮油': [24, 30, 50, 100],
+  '頭皮舒緩液': [50, 100, 200], '頭皮營養液': [24, 30, 100], '生髮液': [50, 100],
 };
 const categoryDensity = {
   '洗髮精': 1.02, '凝膠': 1.05, '慕斯': 1.03, '泥膜': 1.00,
@@ -361,6 +322,7 @@ function calc() {
   const bigBottles = parseInt(document.getElementById('bigBottles').value);
 
   const copyBtn = document.getElementById('copyBtn');
+  const displayBox = document.getElementById('displayBox');
   const singleResult = document.getElementById('singleResult');
   const mixResult = document.getElementById('mixResult');
   const bigBottlesField = document.getElementById('bigBottlesField');
@@ -368,79 +330,57 @@ function calc() {
   copyBtn.classList.remove('show', 'copied');
   copyBtn.textContent = '複製結果';
 
-  // 顯示大容量瓶數欄位條件：有大容量mL 且 有小容量mL
   const wasMix = bigBottlesField.style.display === 'block';
   const isMixMode = !isNaN(bigVol) && bigVol > 0 && !isNaN(smallVol) && smallVol > 0;
-  if (isMixMode && !wasMix) {
-    document.getElementById('bigBottles').value = '';
-  }
+  if (isMixMode && !wasMix) document.getElementById('bigBottles').value = '';
   bigBottlesField.style.display = isMixMode ? 'block' : 'none';
 
-  // 基本欄位不齊
   if (isNaN(batch) || isNaN(density) || density <= 0) {
-    clearDisplay();
-    return;
+    displayBox.style.display = 'none'; return;
   }
 
   // 混批模式
   if (isMixMode) {
+    displayBox.style.display = 'block';
     singleResult.style.display = 'none';
     mixResult.classList.add('show');
 
-    // 大容量消耗 kg
-    const bigUsedKg = isNaN(bigBottles) || bigBottles <= 0
-      ? 0
-      : (bigVol * bigBottles * density) / 1000;
-
+    const bigUsedKg = isNaN(bigBottles) || bigBottles <= 0 ? 0 : (bigVol * bigBottles * density) / 1000;
     const remainKg = batch - bigUsedKg;
     const smallCount = remainKg > 0 ? Math.floor(Math.round((remainKg * 1000) / density / smallVol * 1e9) / 1e9) : 0;
+    const bigMax = Math.floor((batch * 1000) / density / bigVol);
 
-    const overWarning = document.getElementById('overWarning');
-
-    // 大容量理論最大值
-    const bigMax = Math.floor((batch * 1000) / density / bigVol);  // 最大理論值仍用原公式（batch→mL→pcs）
-
-    if (!isNaN(bigBottles) && bigBottles > bigMax) {
-      overWarning.textContent = `⚠️ 大容量瓶數超過批量上限（最多 ${bigMax.toLocaleString()} 瓶）`;
-    } else {
-      overWarning.textContent = '';
-    }
+    document.getElementById('overWarning').textContent =
+      (!isNaN(bigBottles) && bigBottles > bigMax)
+        ? `⚠️ 大容量瓶數超過批量上限（最多 ${bigMax.toLocaleString()} 瓶）` : '';
 
     const displayBig = isNaN(bigBottles) || bigBottles <= 0 ? '' : bigBottles.toLocaleString();
-    const bigLabel = bigVol + ' mL';
-    const smallLabel = smallVol + ' mL';
-
-    document.getElementById('bigLabel').textContent = '大容量 ' + bigLabel;
+    document.getElementById('bigLabel').textContent = '大容量 ' + bigVol + ' mL';
     document.getElementById('bigOutput').textContent = displayBig;
     document.getElementById('bigFormula').textContent =
-      displayBig === '—' ? '請輸入希望生產瓶數' :
-      `消耗 ${bigUsedKg.toFixed(3)} kg`;
+      displayBig === '' ? '請輸入希望生產瓶數' : `消耗 ${bigUsedKg.toFixed(3)} kg`;
 
-    document.getElementById('smallLabel').textContent = '小容量 ' + smallLabel;
+    document.getElementById('smallLabel').textContent = '小容量 ' + smallVol + ' mL';
     document.getElementById('smallOutput').textContent = remainKg > 0 ? smallCount.toLocaleString() : '0';
     document.getElementById('smallFormula').textContent =
-      remainKg > 0
-        ? `剩餘 ${remainKg.toFixed(3)} kg`
-        : '半成品不足';
+      remainKg > 0 ? `剩餘 ${remainKg.toFixed(3)} kg` : '半成品不足';
 
-    if (displayBig !== '—' && remainKg > 0 && smallCount >= 0) {
+    if (displayBig !== '' && remainKg > 0) {
       copyBtn.classList.add('show');
       copyBtn.dataset.info =
-        `${cat} / 每批 ${batch} kg / 混批生產\n` +
-        `大容量 ${bigVol} mL → ${bigBottles.toLocaleString()} pcs\n` +
-        `小容量 ${smallVol} mL → ${smallCount.toLocaleString()} pcs`;
+        `${cat}\n每批 ${batch} kg / 混批生產\n` +
+        `→ 大容量 ${bigVol} mL 產出 ${bigBottles.toLocaleString()} pcs\n` +
+        `→ 小容量 ${smallVol} mL 產出 ${smallCount.toLocaleString()} pcs`;
     }
     return;
   }
 
   // 單批模式
+  displayBox.style.display = 'block';
   singleResult.style.display = 'block';
   mixResult.classList.remove('show');
 
-  if (isNaN(bigVol) || bigVol <= 0) {
-    clearDisplay();
-    return;
-  }
+  if (isNaN(bigVol) || bigVol <= 0) { displayBox.style.display = 'none'; return; }
 
   const result = Math.floor((batch * 1000) / density / bigVol);
   document.getElementById('output').textContent = result.toLocaleString();
@@ -450,19 +390,12 @@ function calc() {
 
   copyBtn.classList.add('show');
   copyBtn.dataset.info =
-    `${cat} / 每批 ${batch} kg / 容量 ${bigVol} mL\n→ 每批理論產出 ${result.toLocaleString()} pcs`;
-}
-
-function clearDisplay() {
-  document.getElementById('output').textContent = '';
-  document.getElementById('output-unit').textContent = '';
-  document.getElementById('formula').textContent = '';
+    `${cat}\n每批 ${batch} kg / 容量 ${bigVol} mL\n→ 每批理論產出 ${result.toLocaleString()} pcs`;
 }
 
 function copyResult() {
   const copyBtn = document.getElementById('copyBtn');
-  const text = copyBtn.dataset.info || '';
-  navigator.clipboard.writeText(text).then(() => {
+  navigator.clipboard.writeText(copyBtn.dataset.info || '').then(() => {
     copyBtn.classList.add('copied');
     copyBtn.textContent = '已複製 ✓';
     setTimeout(() => {
