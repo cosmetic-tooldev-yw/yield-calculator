@@ -299,7 +299,8 @@ function calc() {
   outUnit.textContent = 'pcs';
   formula.textContent = `${batch} × 1000 ÷ ${density} ÷ ${volume} = ${result.toLocaleString()}`;
   copyBtn.classList.add('show');
-  copyBtn.dataset.info = `${cat} / 每批${batch}kg / 容量${volume}mL → 理論產出${result.toLocaleString('en-US')} pcs`;
+  copyBtn.textContent = '複製結果';
+  copyBtn.dataset.info = `${cat} / 每批${batch}kg / 容量${volume}mL\n→ 每批理論產出 ${result.toLocaleString('en-US')} pcs`;
 }
 
 function copyResult() {
@@ -307,10 +308,10 @@ function copyResult() {
   const text = copyBtn.dataset.info || '';
   navigator.clipboard.writeText(text).then(() => {
     copyBtn.classList.add('copied');
-    copyBtn.textContent = '✓ 已複製';
+    copyBtn.textContent = '複製結果';
     setTimeout(() => {
       copyBtn.classList.remove('copied');
-      copyBtn.textContent = '📋 複製結果';
+      copyBtn.textContent = '複製結果';
     }, 1200);
   });
 }
