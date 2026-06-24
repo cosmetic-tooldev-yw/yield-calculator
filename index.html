@@ -245,6 +245,10 @@
       <div class="field-label">大容量（mL）</div>
       <input class="vol-input" type="number" id="bigVol" placeholder="例：500" min="0" step="any" oninput="calc()" />
     </div>
+    <div>
+      <div class="field-label">小容量（mL）（選填，留空則不計算混批）</div>
+      <input class="vol-input" type="number" id="smallVol" placeholder="例：200" min="0" step="any" oninput="calc()" />
+    </div>
     <div id="bigBottlesField" style="display:none;">
       <div class="field-label">大容量希望生產瓶數</div>
       <div class="bottle-stepper">
@@ -258,10 +262,6 @@
           <button class="bbtn" onclick="stepBottles(100)">+100</button>
         </div>
       </div>
-    </div>
-    <div>
-      <div class="field-label">小容量（mL）（選填，留空則不計算混批）</div>
-      <input class="vol-input" type="number" id="smallVol" placeholder="例：200" min="0" step="any" oninput="calc()" />
     </div>
   </div>
 
