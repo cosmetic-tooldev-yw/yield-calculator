@@ -167,21 +167,29 @@
   .display-unit { color: #8e8e93; font-size: 15px; margin-top: 2px; }
   .formula-text { color: #636366; font-size: 11px; margin-top: 6px; text-align: right; }
 
-  .mix-result { display: none; flex-direction: column; gap: 8px; }
+  .mix-result { display: none; flex-direction: column; gap: 0; }
   .mix-result.show { display: flex; }
   .mix-row {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    border-bottom: 1px solid #3a3a3c;
-    padding-bottom: 6px;
+    align-items: flex-end;
+    padding: 6px 0 2px;
+    min-height: 46px;
   }
-  .mix-row:last-child { border-bottom: none; padding-bottom: 0; }
-  .mix-row-label { color: #8e8e93; font-size: 12px; }
-  .mix-row-right { text-align: right; }
-  .mix-row-value { font-size: 32px; font-weight: 300; color: #ff9f0a; line-height: 1; letter-spacing: -0.5px; min-height: 32px; }
-  .mix-row-unit { color: #8e8e93; font-size: 12px; margin-top: 2px; }
-  .mix-formula { color: #636366; font-size: 10px; margin-top: 1px; }
+  .mix-row-label { color: #8e8e93; font-size: 12px; line-height: 1; padding-bottom: 2px; }
+  .mix-row-right { display: flex; align-items: baseline; gap: 4px; }
+  .mix-row-value { font-size: 32px; font-weight: 300; color: #ff9f0a; line-height: 1; letter-spacing: -0.5px; min-height: 32px; min-width: 2ch; }
+  .mix-row-unit { color: #8e8e93; font-size: 12px; line-height: 1; padding-bottom: 2px; min-width: 20px; }
+  .mix-sub {
+    text-align: right;
+    color: #636366;
+    font-size: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #3a3a3c;
+    min-height: 22px;
+  }
+  .mix-sub:last-of-type { border-bottom: none; }
+  .warning-text { color: #ff453a; font-size: 11px; padding-top: 4px; text-align: right; }
   .warning-text { color: #ff453a; font-size: 11px; margin-top: 2px; text-align: right; }
 
   .copy-wrap { margin-top: 8px; display: flex; justify-content: center; visibility: hidden; }
@@ -280,17 +288,17 @@
         <div class="mix-row-right">
           <div class="mix-row-value" id="bigOutput"></div>
           <div class="mix-row-unit">pcs</div>
-          <div class="mix-formula" id="bigFormula"></div>
         </div>
       </div>
+      <div class="mix-sub" id="bigFormula"></div>
       <div class="mix-row">
         <div class="mix-row-label" id="smallLabel"></div>
         <div class="mix-row-right">
           <div class="mix-row-value" id="smallOutput"></div>
           <div class="mix-row-unit">pcs</div>
-          <div class="mix-formula" id="smallFormula"></div>
         </div>
       </div>
+      <div class="mix-sub" id="smallFormula"></div>
       <div class="warning-text" id="overWarning"></div>
     </div>
 
