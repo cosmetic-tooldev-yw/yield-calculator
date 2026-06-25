@@ -13,22 +13,11 @@
     min-height: 100vh;
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
   }
-  .card {
-    background: #1c1c1e;
-    width: 340px;
-    padding: 22px 24px 24px;
-    border-radius: 40px;
-  }
-  .title {
-    color: #fff;
-    font-size: 17px;
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 16px;
-    letter-spacing: 0.3px;
-  }
+  .card { background: #1c1c1e; width: 340px; padding: 22px 24px 24px; border-radius: 40px; }
+  .title { color: #fff; font-size: 17px; font-weight: 600; text-align: center; margin-bottom: 16px; letter-spacing: 0.3px; }
   .fields { display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
   .field-label { color: #8e8e93; font-size: 14px; margin-bottom: 4px; }
+
   select {
     width: 100%;
     background: #2c2c2e;
@@ -49,119 +38,69 @@
   select option { background: #2c2c2e; }
   select:disabled { opacity: 0.4; cursor: not-allowed; }
 
-  .stepper-row {
-    display: flex;
-    align-items: center;
-    background: #2c2c2e;
-    border-radius: 14px;
-    overflow: hidden;
-  }
+  /* 密度 stepper */
+  .stepper-row { display: flex; align-items: center; background: #2c2c2e; border-radius: 14px; overflow: hidden; }
   .stepper-row input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    color: #fff;
-    font-size: 16px;
-    font-family: inherit;
-    padding: 12px 8px;
-    outline: none;
-    min-width: 0;
-    text-align: center;
-    -moz-appearance: textfield;
+    flex: 1; background: transparent; border: none; color: #fff;
+    font-size: 16px; font-family: inherit; padding: 12px 8px;
+    outline: none; min-width: 0; text-align: center; -moz-appearance: textfield;
   }
   .stepper-row input::-webkit-inner-spin-button,
   .stepper-row input::-webkit-outer-spin-button { -webkit-appearance: none; }
   .step-btn {
-    width: 42px;
-    height: 46px;
-    background: #3a3a3c;
-    border: none;
-    color: #fff;
-    font-size: 18px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: background 0.1s;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
+    width: 42px; height: 46px; background: #3a3a3c; border: none; color: #fff;
+    font-size: 18px; cursor: pointer; display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0; transition: background 0.1s;
+    -webkit-tap-highlight-color: transparent; touch-action: manipulation;
   }
   .step-btn:active { background: #ff9f0a; }
   .step-btn.minus { border-right: 1px solid #2c2c2e; }
   .step-btn.plus  { border-left:  1px solid #2c2c2e; }
 
-  /* 四顆步進按鈕 */
-  .bottle-stepper { display: flex; flex-direction: column; gap: 4px; }
-  .bottle-btn-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 4px;
+  /* 帶滑桿的 mL 輸入 */
+  .vol-slider-wrap { display: flex; flex-direction: column; gap: 6px; }
+  .vol-input-row { display: flex; align-items: center; background: #2c2c2e; border-radius: 14px; overflow: hidden; }
+  .vol-input-row input {
+    flex: 1; background: transparent; border: none; color: #fff;
+    font-size: 16px; font-family: inherit; padding: 12px 16px;
+    outline: none; text-align: left; -moz-appearance: textfield; min-width: 0;
   }
-  .bottle-input-wrap {
-    display: flex;
-    align-items: center;
-    background: #2c2c2e;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  .bottle-input-wrap input {
-    width: 100%;
-    background: transparent;
-    border: none;
-    color: #fff;
-    font-size: 16px;
-    font-family: inherit;
-    padding: 10px 8px;
-    outline: none;
-    text-align: center;
-    -moz-appearance: textfield;
-  }
-  .bottle-input-wrap input::-webkit-inner-spin-button,
-  .bottle-input-wrap input::-webkit-outer-spin-button { -webkit-appearance: none; }
-  .bbtn {
-    background: #3a3a3c;
-    border: none;
-    border-radius: 10px;
-    color: #fff;
-    font-size: 13px;
-    font-family: inherit;
-    padding: 8px 0;
-    cursor: pointer;
-    text-align: center;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-    transition: background 0.1s;
-  }
-  .bbtn:active { background: #ff9f0a; }
+  .vol-input-row input::-webkit-inner-spin-button,
+  .vol-input-row input::-webkit-outer-spin-button { -webkit-appearance: none; }
+  .vol-input-row input::placeholder { color: #48484a; }
 
-  input.vol-input {
-    width: 100%;
-    background: #2c2c2e;
-    border: none;
-    border-radius: 14px;
-    color: #fff;
-    font-size: 16px;
-    font-family: inherit;
-    padding: 12px 16px;
-    outline: none;
-    -moz-appearance: textfield;
+  /* 瓶數 stepper + 滑桿 */
+  .bottle-wrap { display: flex; flex-direction: column; gap: 6px; }
+  .bottle-row { display: flex; align-items: center; background: #2c2c2e; border-radius: 14px; overflow: hidden; }
+  .bottle-row input {
+    flex: 1; background: transparent; border: none; color: #fff;
+    font-size: 16px; font-family: inherit; padding: 12px 8px;
+    outline: none; text-align: center; -moz-appearance: textfield; min-width: 0;
   }
-  input.vol-input::-webkit-inner-spin-button,
-  input.vol-input::-webkit-outer-spin-button { -webkit-appearance: none; }
-  input.vol-input::placeholder { color: #48484a; }
+  .bottle-row input::-webkit-inner-spin-button,
+  .bottle-row input::-webkit-outer-spin-button { -webkit-appearance: none; }
+  .bottle-row input::placeholder { color: #48484a; }
+
+  /* 通用滑桿 */
+  input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%; height: 4px; border-radius: 2px;
+    background: #3a3a3c; outline: none; cursor: pointer;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 20px; height: 20px;
+    border-radius: 50%; background: #ff9f0a; cursor: pointer;
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: #ff9f0a; border: none; cursor: pointer;
+  }
 
   .divider { height: 1px; background: #3a3a3c; margin: 2px 0; }
 
   /* 結果區 */
-  .display {
-    background: #2c2c2e;
-    border-radius: 18px;
-    padding: 14px 18px;
-    margin-top: 12px;
-  }
+  .display { background: #2c2c2e; border-radius: 18px; padding: 14px 18px; margin-top: 12px; }
   .display-label { color: #8e8e93; font-size: 12px; margin-bottom: 4px; }
-
   .single-result { text-align: right; }
   .display-value { font-size: 46px; font-weight: 300; color: #ff9f0a; line-height: 1; letter-spacing: -1px; min-height: 46px; }
   .display-unit { color: #8e8e93; font-size: 15px; margin-top: 2px; }
@@ -169,43 +108,21 @@
 
   .mix-result { display: none; flex-direction: column; gap: 0; }
   .mix-result.show { display: flex; }
-  .mix-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding: 6px 0 2px;
-    min-height: 46px;
-  }
+  .mix-row { display: flex; justify-content: space-between; align-items: flex-end; padding: 6px 0 2px; min-height: 46px; }
   .mix-row-label { color: #8e8e93; font-size: 12px; line-height: 1; padding-bottom: 2px; }
   .mix-row-right { display: flex; align-items: baseline; gap: 4px; }
   .mix-row-value { font-size: 32px; font-weight: 300; color: #ff9f0a; line-height: 1; letter-spacing: -0.5px; min-height: 32px; min-width: 2ch; }
   .mix-row-unit { color: #8e8e93; font-size: 12px; line-height: 1; padding-bottom: 2px; min-width: 20px; }
-  .mix-sub {
-    text-align: right;
-    color: #636366;
-    font-size: 10px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid #3a3a3c;
-    min-height: 22px;
-  }
+  .mix-sub { text-align: right; color: #636366; font-size: 10px; padding-bottom: 6px; border-bottom: 1px solid #3a3a3c; min-height: 22px; }
   .mix-sub:last-of-type { border-bottom: none; }
   .warning-text { color: #ff453a; font-size: 11px; padding-top: 4px; text-align: right; }
-  .warning-text { color: #ff453a; font-size: 11px; margin-top: 2px; text-align: right; }
 
   .copy-wrap { margin-top: 8px; display: flex; justify-content: center; visibility: hidden; }
   .copy-wrap.show { visibility: visible; }
   .copy-btn {
-    background: #3a3a3c;
-    color: #ff9f0a;
-    border: none;
-    border-radius: 10px;
-    padding: 6px 16px;
-    font-size: 12px;
-    font-family: inherit;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    -webkit-tap-highlight-color: transparent;
+    background: #3a3a3c; color: #ff9f0a; border: none; border-radius: 10px;
+    padding: 6px 16px; font-size: 12px; font-family: inherit; cursor: pointer;
+    display: flex; align-items: center; -webkit-tap-highlight-color: transparent;
   }
   .copy-btn.copied { color: #30d158; }
 
@@ -215,7 +132,6 @@
 <body>
 <div class="card">
   <div class="title">生產量計算機（頭髮類化粧品）</div>
-
   <div class="fields">
     <div>
       <div class="field-label">類別</div>
@@ -249,39 +165,50 @@
 
     <div class="divider"></div>
 
+    <!-- 大容量 mL + 滑桿 -->
     <div>
       <div class="field-label">大容量（mL）</div>
-      <input class="vol-input" type="number" id="bigVol" placeholder="例：500" min="0" step="any" oninput="calc()" />
+      <div class="vol-slider-wrap">
+        <div class="vol-input-row">
+          <input type="number" id="bigVol" placeholder="例：500" min="0" step="any" oninput="onBigVolInput()" />
+        </div>
+        <input type="range" id="bigVolSlider" min="0" max="1000" step="5" value="0" oninput="onBigVolSlider()" />
+      </div>
     </div>
+
+    <!-- 小容量 mL + 滑桿 -->
     <div>
       <div class="field-label">小容量（mL）（選填，留空則不計算混批）</div>
-      <input class="vol-input" type="number" id="smallVol" placeholder="例：200" min="0" step="any" oninput="calc()" />
+      <div class="vol-slider-wrap">
+        <div class="vol-input-row">
+          <input type="number" id="smallVol" placeholder="例：200" min="0" step="any" oninput="onSmallVolInput()" />
+        </div>
+        <input type="range" id="smallVolSlider" min="0" max="1000" step="5" value="0" oninput="onSmallVolSlider()" />
+      </div>
     </div>
+
+    <!-- 大容量希望生產瓶數（混批才顯示） -->
     <div id="bigBottlesField" style="display:none;">
       <div class="field-label">大容量希望生產瓶數</div>
-      <div class="bottle-stepper">
-        <div class="bottle-input-wrap">
-          <input type="number" id="bigBottles" placeholder="瓶" oninput="calc()" />
+      <div class="bottle-wrap">
+        <div class="bottle-row">
+          <button class="step-btn minus" onclick="stepBottles(-1)">−</button>
+          <input type="number" id="bigBottles" placeholder="瓶" oninput="onBottleInput()" />
+          <button class="step-btn plus" onclick="stepBottles(1)">+</button>
         </div>
-        <div class="bottle-btn-row">
-          <button class="bbtn" onclick="stepBottles(-100)">−100</button>
-          <button class="bbtn" onclick="stepBottles(-50)">−50</button>
-          <button class="bbtn" onclick="stepBottles(50)">+50</button>
-          <button class="bbtn" onclick="stepBottles(100)">+100</button>
-        </div>
+        <input type="range" id="bigBottlesSlider" min="0" max="1000" step="1" value="0" oninput="onBottleSlider()" />
       </div>
     </div>
   </div>
 
+  <!-- 結果區 -->
   <div class="display" id="displayBox" style="display:none;">
     <div class="display-label">每批理論產出</div>
-
     <div class="single-result" id="singleResult">
       <div class="display-value" id="output"></div>
       <div class="display-unit" id="output-unit"></div>
       <div class="formula-text" id="formula"></div>
     </div>
-
     <div class="mix-result" id="mixResult">
       <div class="mix-row">
         <div class="mix-row-label" id="bigLabel"></div>
@@ -301,7 +228,6 @@
       <div class="mix-sub" id="smallFormula"></div>
       <div class="warning-text" id="overWarning"></div>
     </div>
-
     <div class="copy-wrap" id="copyWrap">
       <button class="copy-btn" id="copyBtn" onclick="copyResult()">複製結果</button>
     </div>
@@ -321,6 +247,69 @@ const categoryDensity = {
   '潤髮乳': 0.94, '髮油': 0.94, '頭皮舒緩液': 1.01,
   '頭皮營養液': 0.97, '生髮液': 0.88,
 };
+
+function setSliderFill(el) {
+  const pct = el.max > 0 ? ((el.value - el.min) / (el.max - el.min) * 100) : 0;
+  el.style.background = `linear-gradient(to right, #ff9f0a ${pct}%, #3a3a3c ${pct}%)`;
+}
+
+// 大容量 mL
+function onBigVolInput() {
+  const el = document.getElementById('bigVol');
+  const sl = document.getElementById('bigVolSlider');
+  const v = parseFloat(el.value) || 0;
+  sl.value = Math.min(v, sl.max);
+  setSliderFill(sl);
+  calc();
+}
+function onBigVolSlider() {
+  const sl = document.getElementById('bigVolSlider');
+  document.getElementById('bigVol').value = sl.value;
+  setSliderFill(sl);
+  calc();
+}
+
+// 小容量 mL
+function onSmallVolInput() {
+  const el = document.getElementById('smallVol');
+  const sl = document.getElementById('smallVolSlider');
+  const v = parseFloat(el.value) || 0;
+  sl.value = Math.min(v, sl.max);
+  setSliderFill(sl);
+  calc();
+}
+function onSmallVolSlider() {
+  const sl = document.getElementById('smallVolSlider');
+  document.getElementById('smallVol').value = sl.value;
+  setSliderFill(sl);
+  calc();
+}
+
+// 大容量瓶數
+function stepBottles(dir) {
+  const el = document.getElementById('bigBottles');
+  const sl = document.getElementById('bigBottlesSlider');
+  const cur = parseInt(el.value) || 0;
+  const val = Math.max(0, Math.min(cur + dir, parseInt(sl.max)));
+  el.value = val;
+  sl.value = val;
+  setSliderFill(sl);
+  calc();
+}
+function onBottleInput() {
+  const el = document.getElementById('bigBottles');
+  const sl = document.getElementById('bigBottlesSlider');
+  const v = parseInt(el.value) || 0;
+  sl.value = Math.min(v, sl.max);
+  setSliderFill(sl);
+  calc();
+}
+function onBottleSlider() {
+  const sl = document.getElementById('bigBottlesSlider');
+  document.getElementById('bigBottles').value = sl.value;
+  setSliderFill(sl);
+  calc();
+}
 
 function onCategoryChange() {
   const cat = document.getElementById('category').value;
@@ -345,7 +334,7 @@ function onCategoryChange() {
 function stepDensity(dir) {
   const el = document.getElementById('density');
   const cur = parseFloat(el.value);
-  el.value = isNaN(cur) ? (1).toFixed(2) : Math.max(0, cur + dir * 0.01).toFixed(2);
+  el.value = isNaN(cur) ? '1.00' : Math.max(0, cur + dir * 0.01).toFixed(2);
   calc();
 }
 function handleDensityKey(e) {
@@ -353,12 +342,6 @@ function handleDensityKey(e) {
     e.preventDefault();
     stepDensity(e.key === 'ArrowUp' ? 1 : -1);
   }
-}
-function stepBottles(dir) {
-  const el = document.getElementById('bigBottles');
-  const cur = parseInt(el.value) || 0;
-  el.value = Math.max(0, cur + dir);
-  calc();
 }
 
 function calc() {
@@ -382,22 +365,36 @@ function calc() {
 
   const wasMix = bigBottlesField.style.display === 'block';
   const isMixMode = !isNaN(bigVol) && bigVol > 0 && !isNaN(smallVol) && smallVol > 0;
-  if (isMixMode && !wasMix) document.getElementById('bigBottles').value = '';
+  if (isMixMode && !wasMix) {
+    document.getElementById('bigBottles').value = '';
+    const sl = document.getElementById('bigBottlesSlider');
+    sl.value = 0;
+    setSliderFill(sl);
+  }
   bigBottlesField.style.display = isMixMode ? 'block' : 'none';
 
   if (isNaN(batch) || isNaN(density) || density <= 0) {
     displayBox.style.display = 'none'; return;
   }
 
+  // 混批模式
   if (isMixMode) {
     displayBox.style.display = 'block';
     singleResult.style.display = 'none';
     mixResult.classList.add('show');
 
+    const bigMax = Math.floor((batch * 1000) / density / bigVol);
+    // 更新瓶數滑桿 max
+    const bsl = document.getElementById('bigBottlesSlider');
+    if (parseInt(bsl.max) !== bigMax) {
+      bsl.max = bigMax;
+      if (parseInt(bsl.value) > bigMax) { bsl.value = bigMax; document.getElementById('bigBottles').value = bigMax; }
+      setSliderFill(bsl);
+    }
+
     const bigUsedKg = isNaN(bigBottles) || bigBottles <= 0 ? 0 : (bigVol * bigBottles * density) / 1000;
     const remainKg = batch - bigUsedKg;
     const smallCount = remainKg > 0 ? Math.floor(Math.round((remainKg * 1000) / density / smallVol * 1e9) / 1e9) : 0;
-    const bigMax = Math.floor((batch * 1000) / density / bigVol);
 
     document.getElementById('overWarning').textContent =
       (!isNaN(bigBottles) && bigBottles > bigMax)
@@ -408,7 +405,6 @@ function calc() {
     document.getElementById('bigOutput').textContent = displayBig;
     document.getElementById('bigFormula').textContent =
       displayBig === '' ? '請輸入希望生產瓶數' : `消耗 ${bigUsedKg.toFixed(3)} kg`;
-
     document.getElementById('smallLabel').textContent = '小容量 ' + smallVol + ' mL';
     document.getElementById('smallOutput').textContent = remainKg > 0 ? smallCount.toLocaleString() : '0';
     document.getElementById('smallFormula').textContent =
@@ -424,6 +420,7 @@ function calc() {
     return;
   }
 
+  // 單批模式
   displayBox.style.display = 'block';
   singleResult.style.display = 'block';
   mixResult.classList.remove('show');
@@ -435,7 +432,6 @@ function calc() {
   document.getElementById('output-unit').textContent = 'pcs';
   document.getElementById('formula').textContent =
     `${batch} × 1000 ÷ ${density} ÷ ${bigVol} = ${result.toLocaleString()}`;
-
   copyWrap.classList.add('show');
   copyBtn.dataset.info =
     `${cat}\n每批 ${batch} kg / 容量 ${bigVol} mL\n→ 每批理論產出 ${result.toLocaleString()} pcs`;
@@ -446,10 +442,7 @@ function copyResult() {
   navigator.clipboard.writeText(copyBtn.dataset.info || '').then(() => {
     copyBtn.classList.add('copied');
     copyBtn.textContent = '已複製 ✓';
-    setTimeout(() => {
-      copyBtn.classList.remove('copied');
-      copyBtn.textContent = '複製結果';
-    }, 1200);
+    setTimeout(() => { copyBtn.classList.remove('copied'); copyBtn.textContent = '複製結果'; }, 1200);
   });
 }
 </script>
