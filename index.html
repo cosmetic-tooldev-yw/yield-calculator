@@ -9,8 +9,9 @@
     background: #1c1c1e;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     min-height: 100vh;
+    padding-top: 40px;
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
   }
   .card { background: #1c1c1e; width: 340px; padding: 22px 24px 24px; border-radius: 40px; }
@@ -170,7 +171,9 @@
       <div class="field-label">大容量（mL）</div>
       <div class="vol-slider-wrap">
         <div class="vol-input-row">
-          <input type="number" id="bigVol" placeholder="例：500" min="0" step="any" oninput="onBigVolInput()" />
+          <button class="step-btn minus" onclick="stepVol('bigVol','bigVolSlider',-5)">−</button>
+          <input type="number" id="bigVol" placeholder="例：500" min="0" step="any" oninput="onBigVolInput()" style="text-align:center;" />
+          <button class="step-btn plus" onclick="stepVol('bigVol','bigVolSlider',5)">+</button>
         </div>
         <input type="range" id="bigVolSlider" min="0" max="1000" step="5" value="0" oninput="onBigVolSlider()" />
       </div>
@@ -181,7 +184,9 @@
       <div class="field-label">小容量（mL）（選填，留空則不計算混批）</div>
       <div class="vol-slider-wrap">
         <div class="vol-input-row">
-          <input type="number" id="smallVol" placeholder="例：200" min="0" step="any" oninput="onSmallVolInput()" />
+          <button class="step-btn minus" onclick="stepVol('smallVol','smallVolSlider',-5)">−</button>
+          <input type="number" id="smallVol" placeholder="例：200" min="0" step="any" oninput="onSmallVolInput()" style="text-align:center;" />
+          <button class="step-btn plus" onclick="stepVol('smallVol','smallVolSlider',5)">+</button>
         </div>
         <input type="range" id="smallVolSlider" min="0" max="1000" step="5" value="0" oninput="onSmallVolSlider()" />
       </div>
@@ -251,6 +256,17 @@ const categoryDensity = {
 function setSliderFill(el) {
   const pct = el.max > 0 ? ((el.value - el.min) / (el.max - el.min) * 100) : 0;
   el.style.background = `linear-gradient(to right, #ff9f0a ${pct}%, #3a3a3c ${pct}%)`;
+}
+
+function stepVol(inputId, sliderId, dir) {
+  const el = document.getElementById(inputId);
+  const sl = document.getElementById(sliderId);
+  const cur = parseFloat(el.value) || 0;
+  const val = Math.max(0, cur + dir);
+  el.value = val;
+  sl.value = Math.min(val, sl.max);
+  setSliderFill(sl);
+  calc();
 }
 
 // 大容量 mL
