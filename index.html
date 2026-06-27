@@ -6,7 +6,6 @@
 <style>
   :root {
     --bg: #1c1c1e;
-    --card-bg: #1c1c1e;
     --field-bg: #2c2c2e;
     --btn-bg: #3a3a3c;
     --divider: #3a3a3c;
@@ -17,12 +16,11 @@
     --accent: #d97757;
     --accent-copy: #30d158;
     --danger: #ff453a;
-    --slider-track: #3a3a3c;
+    --track: #3a3a3c;
   }
   @media (prefers-color-scheme: light) {
     :root {
       --bg: #f2f2f7;
-      --card-bg: #f2f2f7;
       --field-bg: #fff;
       --btn-bg: #e5e5ea;
       --divider: #c6c6c8;
@@ -33,7 +31,7 @@
       --accent: #d97757;
       --accent-copy: #34c759;
       --danger: #ff3b30;
-      --slider-track: #c6c6c8;
+      --track: #c6c6c8;
     }
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -46,27 +44,18 @@
     padding-top: 40px;
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
   }
-  .card { background: var(--card-bg); width: 340px; padding: 22px 24px 24px; border-radius: 40px; }
-  .title { color: var(--text); font-size: 17px; font-weight: 600; text-align: center; margin-bottom: 16px; letter-spacing: 0.3px; }
+  .card { background: var(--bg); width: 340px; padding: 22px 24px 24px; border-radius: 40px; }
+  .title { color: var(--text); font-size: 17px; font-weight: 600; text-align: center; margin-bottom: 16px; }
   .fields { display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
   .field-label { color: var(--label); font-size: 14px; margin-bottom: 4px; }
 
   select {
-    width: 100%;
-    background: var(--field-bg);
-    color: var(--text);
-    border: none;
-    border-radius: 14px;
-    padding: 12px 16px;
-    font-size: 16px;
-    font-family: inherit;
-    appearance: none;
-    -webkit-appearance: none;
+    width: 100%; background: var(--field-bg); color: var(--text);
+    border: none; border-radius: 14px; padding: 12px 16px;
+    font-size: 16px; font-family: inherit; appearance: none; -webkit-appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236c6c70' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 16px center;
-    cursor: pointer;
-    outline: none;
+    background-repeat: no-repeat; background-position: right 16px center;
+    cursor: pointer; outline: none;
   }
   select option { background: var(--field-bg); }
   select:disabled { opacity: 0.4; cursor: not-allowed; }
@@ -79,6 +68,7 @@
   }
   .stepper-row input::-webkit-inner-spin-button,
   .stepper-row input::-webkit-outer-spin-button { -webkit-appearance: none; }
+
   .step-btn {
     width: 42px; height: 46px; background: var(--btn-bg); border: none; color: var(--text);
     font-size: 18px; cursor: pointer; display: flex; align-items: center;
@@ -93,7 +83,7 @@
   .vol-input-row { display: flex; align-items: center; background: var(--field-bg); border-radius: 14px; overflow: hidden; }
   .vol-input-row input {
     flex: 1; background: transparent; border: none; color: var(--text);
-    font-size: 16px; font-family: inherit; padding: 12px 16px;
+    font-size: 16px; font-family: inherit; padding: 12px 8px;
     outline: none; text-align: center; -moz-appearance: textfield; min-width: 0;
   }
   .vol-input-row input::-webkit-inner-spin-button,
@@ -113,12 +103,19 @@
 
   input[type="range"] {
     -webkit-appearance: none;
-    width: 100%; height: 4px; border-radius: 2px;
-    background: var(--slider-track); outline: none; cursor: pointer;
+    width: 100%; height: 28px;
+    background: transparent; outline: none; cursor: pointer;
+  }
+  input[type="range"]::-webkit-slider-runnable-track {
+    height: 4px; border-radius: 2px;
+  }
+  input[type="range"]::-moz-range-track {
+    height: 4px; border-radius: 2px;
   }
   input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none; width: 20px; height: 20px;
     border-radius: 50%; background: var(--accent); cursor: pointer;
+    margin-top: -8px;
   }
   input[type="range"]::-moz-range-thumb {
     width: 20px; height: 20px; border-radius: 50%;
@@ -153,7 +150,6 @@
     display: flex; align-items: center; -webkit-tap-highlight-color: transparent;
   }
   .copy-btn.copied { color: var(--accent-copy); }
-
   .disclaimer { color: var(--subtext); font-size: 11px; text-align: center; margin-top: 12px; }
 </style>
 </head>
@@ -193,33 +189,30 @@
 
     <div class="divider"></div>
 
-    <!-- 大容量 mL + 滑桿 -->
     <div>
       <div class="field-label">大容量（mL）</div>
       <div class="vol-slider-wrap">
         <div class="vol-input-row">
           <button class="step-btn minus" onclick="stepVol('bigVol','bigVolSlider',-5)">−</button>
-          <input type="number" id="bigVol" placeholder="例：500" min="0" step="any" oninput="onBigVolInput()" style="text-align:center;" />
+          <input type="number" id="bigVol" placeholder="例：500" min="0" step="any" oninput="onBigVolInput()" />
           <button class="step-btn plus" onclick="stepVol('bigVol','bigVolSlider',5)">+</button>
         </div>
         <input type="range" id="bigVolSlider" min="0" max="1000" step="5" value="0" oninput="onBigVolSlider()" />
       </div>
     </div>
 
-    <!-- 小容量 mL + 滑桿 -->
     <div>
       <div class="field-label">小容量（mL）（選填，留空則不計算混批）</div>
       <div class="vol-slider-wrap">
         <div class="vol-input-row">
           <button class="step-btn minus" onclick="stepVol('smallVol','smallVolSlider',-5)">−</button>
-          <input type="number" id="smallVol" placeholder="例：200" min="0" step="any" oninput="onSmallVolInput()" style="text-align:center;" />
+          <input type="number" id="smallVol" placeholder="例：200" min="0" step="any" oninput="onSmallVolInput()" />
           <button class="step-btn plus" onclick="stepVol('smallVol','smallVolSlider',5)">+</button>
         </div>
         <input type="range" id="smallVolSlider" min="0" max="1000" step="5" value="0" oninput="onSmallVolSlider()" />
       </div>
     </div>
 
-    <!-- 大容量希望生產瓶數（混批才顯示） -->
     <div id="bigBottlesField" style="display:none;">
       <div class="field-label">大容量希望生產瓶數</div>
       <div class="bottle-wrap">
@@ -233,7 +226,6 @@
     </div>
   </div>
 
-  <!-- 結果區 -->
   <div class="display" id="displayBox" style="display:none;">
     <div class="display-label">每批理論產出</div>
     <div class="single-result" id="singleResult">
@@ -280,12 +272,27 @@ const categoryDensity = {
   '頭皮營養液': 0.97, '生髮液': 0.88,
 };
 
+function getTrackColor() {
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? '#3a3a3c' : '#c6c6c8';
+}
+
 function setSliderFill(el) {
-  const pct = el.max > 0 ? ((el.value - el.min) / (el.max - el.min) * 100) : 0;
-  const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const filled = isDark ? '#d97757' : '#d97757';
-  const track  = isDark ? '#3a3a3c' : '#c6c6c8';
-  el.style.background = `linear-gradient(to right, ${filled} ${pct}%, ${track} ${pct}%)`;
+  const ids = ['bigVolSlider', 'smallVolSlider', 'bigBottlesSlider'];
+  const track = getTrackColor();
+  let tag = document.getElementById('slider-fill-style');
+  if (!tag) {
+    tag = document.createElement('style');
+    tag.id = 'slider-fill-style';
+    document.head.appendChild(tag);
+  }
+  tag.textContent = ids.map(id => {
+    const s = document.getElementById(id);
+    if (!s) return '';
+    const p = s.max > 0 ? ((s.value - s.min) / (s.max - s.min) * 100) : 0;
+    const g = 'linear-gradient(to right, #d97757 ' + p + '%, ' + track + ' ' + p + '%)';
+    return '#' + id + '::-webkit-slider-runnable-track { background: ' + g + ' !important; } ' +
+           '#' + id + '::-moz-range-track { background: ' + g + ' !important; }';
+  }).join('\n');
 }
 
 function stepVol(inputId, sliderId, dir) {
@@ -299,12 +306,10 @@ function stepVol(inputId, sliderId, dir) {
   calc();
 }
 
-// 大容量 mL
 function onBigVolInput() {
   const el = document.getElementById('bigVol');
   const sl = document.getElementById('bigVolSlider');
-  const v = parseFloat(el.value) || 0;
-  sl.value = Math.min(v, sl.max);
+  sl.value = Math.min(parseFloat(el.value) || 0, sl.max);
   setSliderFill(sl);
   calc();
 }
@@ -315,12 +320,10 @@ function onBigVolSlider() {
   calc();
 }
 
-// 小容量 mL
 function onSmallVolInput() {
   const el = document.getElementById('smallVol');
   const sl = document.getElementById('smallVolSlider');
-  const v = parseFloat(el.value) || 0;
-  sl.value = Math.min(v, sl.max);
+  sl.value = Math.min(parseFloat(el.value) || 0, sl.max);
   setSliderFill(sl);
   calc();
 }
@@ -331,7 +334,6 @@ function onSmallVolSlider() {
   calc();
 }
 
-// 大容量瓶數
 function stepBottles(dir) {
   const el = document.getElementById('bigBottles');
   const sl = document.getElementById('bigBottlesSlider');
@@ -345,8 +347,7 @@ function stepBottles(dir) {
 function onBottleInput() {
   const el = document.getElementById('bigBottles');
   const sl = document.getElementById('bigBottlesSlider');
-  const v = parseInt(el.value) || 0;
-  sl.value = Math.min(v, sl.max);
+  sl.value = Math.min(parseInt(el.value) || 0, sl.max);
   setSliderFill(sl);
   calc();
 }
@@ -423,18 +424,19 @@ function calc() {
     displayBox.style.display = 'none'; return;
   }
 
-  // 混批模式
   if (isMixMode) {
     displayBox.style.display = 'block';
     singleResult.style.display = 'none';
     mixResult.classList.add('show');
 
     const bigMax = Math.floor((batch * 1000) / density / bigVol);
-    // 更新瓶數滑桿 max
     const bsl = document.getElementById('bigBottlesSlider');
     if (parseInt(bsl.max) !== bigMax) {
       bsl.max = bigMax;
-      if (parseInt(bsl.value) > bigMax) { bsl.value = bigMax; document.getElementById('bigBottles').value = bigMax; }
+      if (parseInt(bsl.value) > bigMax) {
+        bsl.value = bigMax;
+        document.getElementById('bigBottles').value = bigMax;
+      }
       setSliderFill(bsl);
     }
 
@@ -444,29 +446,28 @@ function calc() {
 
     document.getElementById('overWarning').textContent =
       (!isNaN(bigBottles) && bigBottles > bigMax)
-        ? `⚠️ 大容量瓶數超過批量上限（最多 ${bigMax.toLocaleString()} 瓶）` : '';
+        ? '⚠️ 大容量瓶數超過批量上限（最多 ' + bigMax.toLocaleString() + ' 瓶）' : '';
 
     const displayBig = isNaN(bigBottles) || bigBottles <= 0 ? '' : bigBottles.toLocaleString();
     document.getElementById('bigLabel').textContent = '大容量 ' + bigVol + ' mL';
     document.getElementById('bigOutput').textContent = displayBig;
     document.getElementById('bigFormula').textContent =
-      displayBig === '' ? '請輸入希望生產瓶數' : `消耗 ${bigUsedKg.toFixed(3)} kg`;
+      displayBig === '' ? '請輸入希望生產瓶數' : '消耗 ' + bigUsedKg.toFixed(3) + ' kg';
     document.getElementById('smallLabel').textContent = '小容量 ' + smallVol + ' mL';
     document.getElementById('smallOutput').textContent = remainKg > 0 ? smallCount.toLocaleString() : '0';
     document.getElementById('smallFormula').textContent =
-      remainKg > 0 ? `剩餘 ${remainKg.toFixed(3)} kg` : '半成品不足';
+      remainKg > 0 ? '剩餘 ' + remainKg.toFixed(3) + ' kg' : '半成品不足';
 
     if (displayBig !== '' && remainKg > 0) {
       copyWrap.classList.add('show');
       copyBtn.dataset.info =
-        `${cat}\n每批 ${batch} kg / 混批生產\n` +
-        `→ 大容量 ${bigVol} mL 產出 ${bigBottles.toLocaleString()} pcs\n` +
-        `→ 小容量 ${smallVol} mL 產出 ${smallCount.toLocaleString()} pcs`;
+        cat + '\n每批 ' + batch + ' kg / 混批生產\n' +
+        '→ 大容量 ' + bigVol + ' mL 產出 ' + bigBottles.toLocaleString() + ' pcs\n' +
+        '→ 小容量 ' + smallVol + ' mL 產出 ' + smallCount.toLocaleString() + ' pcs';
     }
     return;
   }
 
-  // 單批模式
   displayBox.style.display = 'block';
   singleResult.style.display = 'block';
   mixResult.classList.remove('show');
@@ -477,10 +478,10 @@ function calc() {
   document.getElementById('output').textContent = result.toLocaleString();
   document.getElementById('output-unit').textContent = 'pcs';
   document.getElementById('formula').textContent =
-    `${batch} × 1000 ÷ ${density} ÷ ${bigVol} = ${result.toLocaleString()}`;
+    batch + ' × 1000 ÷ ' + density + ' ÷ ' + bigVol + ' = ' + result.toLocaleString();
   copyWrap.classList.add('show');
   copyBtn.dataset.info =
-    `${cat}\n每批 ${batch} kg / 容量 ${bigVol} mL\n→ 每批理論產出 ${result.toLocaleString()} pcs`;
+    cat + '\n每批 ' + batch + ' kg / 容量 ' + bigVol + ' mL\n→ 每批理論產出 ' + result.toLocaleString() + ' pcs';
 }
 
 function copyResult() {
@@ -491,6 +492,9 @@ function copyResult() {
     setTimeout(() => { copyBtn.classList.remove('copied'); copyBtn.textContent = '複製結果'; }, 1200);
   });
 }
+
+// 初始化滑桿填色
+setSliderFill(document.getElementById('bigVolSlider'));
 </script>
 </body>
 </html>
