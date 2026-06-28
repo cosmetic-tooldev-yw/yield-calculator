@@ -194,7 +194,7 @@
       <div class="vol-slider-wrap">
         <div class="vol-input-row">
           <button class="step-btn minus" onclick="stepVol('bigVol','bigVolSlider',-5)">−</button>
-          <input type="number" id="bigVol" placeholder="例：500" min="0" step="any" oninput="onBigVolInput()" />
+          <input type="number" id="bigVol" placeholder="例：500" min="0" step="any" oninput="onBigVolInput()" onfocus="this.select()" />
           <button class="step-btn plus" onclick="stepVol('bigVol','bigVolSlider',5)">+</button>
         </div>
         <input type="range" id="bigVolSlider" min="0" max="1000" step="5" value="0" oninput="onBigVolSlider()" />
@@ -206,7 +206,7 @@
       <div class="vol-slider-wrap">
         <div class="vol-input-row">
           <button class="step-btn minus" onclick="stepVol('smallVol','smallVolSlider',-5)">−</button>
-          <input type="number" id="smallVol" placeholder="例：200" min="0" step="any" oninput="onSmallVolInput()" />
+          <input type="number" id="smallVol" placeholder="例：200" min="0" step="any" oninput="onSmallVolInput()" onfocus="this.select()" />
           <button class="step-btn plus" onclick="stepVol('smallVol','smallVolSlider',5)">+</button>
         </div>
         <input type="range" id="smallVolSlider" min="0" max="1000" step="5" value="0" oninput="onSmallVolSlider()" />
@@ -218,7 +218,7 @@
       <div class="bottle-wrap">
         <div class="bottle-row">
           <button class="step-btn minus" onclick="stepBottles(-1)">−</button>
-          <input type="number" id="bigBottles" placeholder="瓶" oninput="onBottleInput()" />
+          <input type="number" id="bigBottles" placeholder="瓶" oninput="onBottleInput()" onfocus="this.select()" />
           <button class="step-btn plus" onclick="stepBottles(1)">+</button>
         </div>
         <input type="range" id="bigBottlesSlider" min="0" max="1000" step="1" value="0" oninput="onBottleSlider()" />
